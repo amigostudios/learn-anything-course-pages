@@ -11,6 +11,7 @@ Each section shows the live site next to the redesign and lists the links to tes
 | Screen | Link |
 | --- | --- |
 | Home page (already live) | [learn-anything-public.site](https://learn-anything-public.site/) · [prototype copy](https://amigostudios.github.io/learn-anything-course-pages/home.html) |
+| Pricing v2 (the approved plan) | [pricing.html](https://amigostudios.github.io/learn-anything-course-pages/pricing.html) · [live pricing page](https://learn-anything-public.site/pricing) for comparison |
 | Library | [library.html](https://amigostudios.github.io/learn-anything-course-pages/library.html) |
 | Course page, new learner | [course.html](https://amigostudios.github.io/learn-anything-course-pages/course.html) |
 | Course page, in progress (3 of 10 done) | [course.html?state=progress](https://amigostudios.github.io/learn-anything-course-pages/course.html?state=progress) |
@@ -34,6 +35,7 @@ The lesson player, quiz, Lessons drawer, library search and topic filters all wo
 - **Lesson.** "Lesson 1 of 10", six segment ticks, a stage that frames the visual, the heading, the key idea and the narration, a floating player bar that docks full width on phones with safe-area padding, and a Lessons drawer for jumping around. The planet mark is the Ask-the-teacher button.
 - **Visual system v2.** Segments use the v2 JSON from the visual-system package (`kind`, `heading`, `key_idea`, `body`, `visual.type`): one of ten typed cards per segment (icon, compare, steps, stat with source, timeline, do/don't, diagram, definition, rule, photo). The gallery link above shows every card with the JSON that produced it.
 - **Quiz and completion.** Lettered options with clear correct and incorrect states, and a completion card (score, course progress, next lesson, key ideas) instead of the silent 1.8-second redirect.
+- **Pricing v2.** The plan from the business-model review on one page: Free at one lesson a day, Pro with the teacher's voice, a founding year, comparison and FAQ. The founding-member count on the page is sample data.
 - **Motion stays light.** The starfield and the band light are the only ambient motion; reduced motion is respected throughout.
 
 The review page has before/after sheets of the live site next to the redesign, full-length phone captures and the palette.
@@ -53,6 +55,7 @@ Reply wherever you got this link, or open an issue here if you use GitHub. Page 
 ```
 index.html                    the before-and-after index (start here)
 home.html                     the home page prototype (the design that is live)
+pricing.html                  the pricing v2 prototype (approved plan: Free one lesson a day, Pro $9.99 / $59.99, $49 founding year)
 library.html, course.html,
 lesson.html, loading.html     the prototype pages (states via ?state=… as in the table above)
 assets/                       courses.css + courses.js (all styles are la- prefixed and scoped under .la-app)
