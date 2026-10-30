@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Learn Anything course pages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/courses.css">
+<style>
+  /* Review page for the redesign. One committed light look (it previews a light product); the pages themselves carry the tokens. */
+  :root{--bg:#FFFFFF;--fg:#0B1733;--line:#E2E8F4;--muted:#55637F;--blue:#0F62E6;--soft:#EAF1FF;--paper:#F4F7FD;--display:"Inter Tight","Inter",system-ui,sans-serif;--body:"Inter",system-ui,sans-serif}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body)}
+  .hub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+  .hub-card{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .hub-card:hover{transform:translateY(-2px);border-color:#CBD8F0;box-shadow:0 20px 50px -30px rgba(11,23,51,.35)}
+  .hub-card img{width:100%;max-width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-bottom:1px solid var(--line);background:var(--paper)}
+  .hub-card .b{padding:14px 16px 16px}
+  .hub-card h3{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:-.015em}
+  .hub-card p{margin-top:4px;font-size:13.5px;color:var(--muted);line-height:1.45}
+  .hub-card .l{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+  .hub-card .l a{font-size:12.5px;font-weight:600;color:var(--blue);background:var(--soft);padding:5px 10px;border-radius:999px}
+  .hub-card .l a:hover{background:#DCE8FF}
+  .hub-sec{margin-top:72px}
+  .hub-sec h2{font-family:var(--display);font-weight:600;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
+  .hub-sec .lede{margin-top:10px;max-width:720px;font-size:16px;color:var(--muted);text-wrap:pretty}
+  .phones{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;margin-top:28px}
+  .phone{display:flex;flex-direction:column;gap:10px;align-items:center;max-width:100%}
+  .phone .frame{width:min(390px,100%);height:760px;border-radius:38px;border:1px solid #CBD8F0;background:#fff;overflow-y:auto;overflow-x:hidden;box-shadow:0 30px 70px -40px rgba(11,23,51,.5);scrollbar-width:thin}
+  .phone .frame img{display:block;width:100%;max-width:100%;height:auto}
+  .phone span{font-size:13px;color:var(--muted)}
+  .ba{display:grid;gap:34px;margin-top:28px}
+  .ba figure{margin:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff}
+  .ba img{width:100%;max-width:100%;display:block}
+  .ba figcaption{padding:14px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+  .ba figcaption b{color:var(--fg);font-weight:600}
+  .notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px;margin-top:22px}
+  .notes li{min-width:0;padding:16px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.5;color:var(--muted)}
+  .notes b{display:block;color:var(--fg);font-weight:600;margin-bottom:3px}
+  .tokens{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .tokens span{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);padding:6px 10px 6px 6px;border:1px solid var(--line);border-radius:999px}
+  .tokens i{width:22px;height:22px;border-radius:999px;border:1px solid rgba(11,23,51,.08)}
+  .hand{margin-top:22px;display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
+  .hand>*{min-width:0}
+  .hand pre{margin:0;background:#050D2B;color:#DCE8FF;border-radius:18px;padding:18px 20px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-x:auto}
+  .hand ul li{padding:9px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.45;color:var(--muted)}
+  .hand ul li b{color:var(--fg);font-weight:600}
+  @media (max-width:1024px){.hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.notes{grid-template-columns:1fr}.hand{grid-template-columns:1fr}}
+  @media (max-width:640px){.hub-grid{grid-template-columns:1fr}.hub-sec{margin-top:52px}.phone .frame{height:640px}}
+  .lede a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+  .la-copy a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="la-app" data-page="hub">
+<header class="la-band">
+  <div class="la-sky" aria-hidden="true"><div class="la-sky-light"></div><canvas class="la-stars"></canvas></div>
+  <div class="la-ph la-wrap" style="padding-top:44px">
+    <p class="la-eyebrow">Learn Anything · course pages · Oct 30, 2026</p>
+    <h1 class="la-display">Library, course and lesson pages, redesigned.</h1>
+    <p class="la-lede">Built on the home page system: one nav, the night sky on every page top, Inter Tight headlines, quiet white content below. Every screen is laid out for 375 px phones first, then widened. Open any page below; the lesson player, quiz and drawer are live.</p>
+    <div class="la-cta-row">
+      <a class="la-btn la-btn-white la-btn-lg" href="library.html">Open the library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <a class="la-btn la-btn-ghost la-btn-lg" href="course.html">Course page</a>
+      <a class="la-btn la-btn-ghost la-btn-lg" href="lesson.html">Lesson player</a>
+    </div>
+  </div>
+</header>
+
+<main class="la-wrap">
+  <section class="hub-sec" style="margin-top:48px">
+    <h2>Open the prototype</h2>
+    <p class="lede">Real content from the live site (the Basic Knife Skills course and its first lesson). Progress, the "continue" states and the key ideas are sample data so each state can be seen. Pages open in a new tab.</p>
+    <div class="hub-grid">
+      <a class="hub-card" href="library.html" target="_blank" rel="noopener"><img src="previews/library-desktop.jpg" alt=""><div class="b"><h3>Library</h3><p>Sky hero with search and topic filters, a continue-learning strip, course cards. Phones get a dense list instead of tall cards.</p></div></a>
+      <div class="hub-card"><img src="previews/course-progress-desktop.jpg" alt=""><div class="b"><h3>Course page</h3><p>One design for public and enrolled views: outline as a path with done / up-next states, a floating "before you start" card, sticky continue bar on phones.</p><div class="l"><a href="course.html" target="_blank" rel="noopener">New learner</a><a href="course.html?state=progress" target="_blank" rel="noopener">In progress (3 of 10)</a></div></div></div>
+      <div class="hub-card"><img src="previews/lesson-desktop.jpg" alt=""><div class="b"><h3>Lesson player</h3><p>Segmented progress, a stage for every visual kind, narration with word reveal, a floating player bar, the course outline in a drawer.</p><div class="l"><a href="lesson.html" target="_blank" rel="noopener">Player</a><a href="lesson.html?state=playing" target="_blank" rel="noopener">Playing</a><a href="lesson.html?drawer=1" target="_blank" rel="noopener">Lessons drawer</a><a href="lesson.html?state=kinds" target="_blank" rel="noopener">All visual kinds</a></div></div></div>
+      <div class="hub-card"><img src="previews/quiz-desktop.jpg" alt=""><div class="b"><h3>Quiz</h3><p>Same shell, question card with lettered options, correct and incorrect states, the explanation, and "ask the teacher" one tap away.</p><div class="l"><a href="lesson.html?state=quiz" target="_blank" rel="noopener">Open the quiz</a></div></div></div>
+      <div class="hub-card"><img src="previews/done-desktop.jpg" alt=""><div class="b"><h3>Lesson complete</h3><p>Replaces the 1.8-second auto-redirect: score, course progress, the next lesson one tap away, and the key ideas to take along.</p><div class="l"><a href="lesson.html?state=done" target="_blank" rel="noopener">Open</a></div></div></div>
+      <div class="hub-card"><img src="previews/loading-desktop.jpg" alt=""><div class="b"><h3>Generating</h3><p>The wait screen while a lesson is written: the ring-planet mark with the learner dot on its lap, the four steps, a tip.</p><div class="l"><a href="loading.html" target="_blank" rel="noopener">Open</a></div></div></div>
+    </div>
+  </section>
+
+  <section class="hub-sec">
+    <h2>On a phone</h2>
+    <p class="lede">Full-length captures at 390 px, scrollable inside each frame. The lesson keeps the player docked at the bottom with safe-area padding; the course page shows a continue bar once the hero button scrolls away.</p>
+    <div class="phones">
+      <div class="phone"><div class="frame"><img src="previews/library-phone.jpg" alt="Library on a phone"></div><span>Library</span></div>
+      <div class="phone"><div class="frame"><img src="previews/course-phone.jpg" alt="Course page on a phone"></div><span>Course page, in progress</span></div>
+      <div class="phone"><div class="frame"><img src="previews/lesson-phone.jpg" alt="Lesson on a phone"><img src="previews/quiz-phone.jpg" alt="Quiz on a phone"><img src="previews/done-phone.jpg" alt="Lesson complete on a phone"></div><span>Lesson, quiz, complete</span></div>
+    </div>
+  </section>
+
+  <section class="hub-sec">
+    <h2>Before and after</h2>
+    <p class="lede">Left: the live site on Oct 30. Right: the redesign at the same width.</p>
+    <div class="ba">
+      <figure><img src="previews/before-after-library.jpg" alt="Library page, live site next to the redesign"><figcaption><b>Library.</b> The plain white header and 3-up cards become the sky hero with search and filters, a continue strip, and cards with the level and length visible.</figcaption></figure>
+      <figure><img src="previews/before-after-course.jpg" alt="Course page, live site next to the redesign"><figcaption><b>Course page.</b> The public course page had no site header at all and a second, different layout for enrolled users. Now one page: hero, outline path, details card.</figcaption></figure>
+      <figure><img src="previews/before-after-lesson.jpg" alt="Lesson page, live site next to the redesign"><figcaption><b>Lesson.</b> Lesson number and course title in the bar, six segment ticks instead of one thin line, a stage that frames every visual, a player bar that floats.</figcaption></figure>
+      <figure><img src="previews/before-after-quiz.jpg" alt="Quiz, live site next to the redesign"><figcaption><b>Quiz.</b> Lettered options in the display face, states that read at a glance, progress dots, the teacher a tap away.</figcaption></figure>
+      <figure><img src="previews/before-after-phone.jpg" alt="Course page and lesson on a phone, live site next to the redesign"><figcaption><b>Phone.</b> Course page and lesson, live then redesigned. Buttons span the width, lesson rows carry their state, the player gets safe-area padding and a 58 px play button.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="hub-sec">
+    <h2>What changed, and why</h2>
+    <ul class="notes">
+      <li><b>One nav everywhere.</b> The home page nav (mark, three links, Account, Start learning) now sits on every course page in a sky tone; the lesson gets a compact white bar with the same geometry.</li>
+      <li><b>The sky as a page top, not a hero.</b> A shorter band carries the page title; the same light from above, stars, and type. Content below is white so lessons and cards stay calm.</li>
+      <li><b>Library is scannable.</b> Search, topic filters, lesson count and sittings on each card. On phones each course is one 92 px row, so six courses fit a screen instead of one and a half.</li>
+      <li><b>Course page shows where you are.</b> Modules are numbered, lessons form a path with done, up-next and locked states, and the first card tells you what to have ready. Public and enrolled share one layout.</li>
+      <li><b>Lesson orientation.</b> "Lesson 1 of 10", a Lessons drawer to jump around without leaving, and six ticks for the six parts of the lesson.</li>
+      <li><b>Player bar.</b> Floats at the bottom on desktop, docks full-width on phones with safe-area padding; 58 px play, 44 px prev/next, speed as a segmented pill (a cycling pill on phones).</li>
+      <li><b>Visual kinds.</b> All ten segment visuals restyled into one stage language; code blocks go navy, charts use the brand blues.</li>
+      <li><b>Completion moment.</b> A small sky card with score, course progress and the next lesson replaces the silent redirect back to the course.</li>
+      <li><b>Honest copy only.</b> Nothing invented: lesson counts, levels, dates and resources come from the site. Sittings are derived from lesson count the same way the live course page does it.</li>
+      <li><b>Motion stays light.</b> The starfield and the light are the only ambient motion; everything else is state change. Reduced motion is respected throughout.</li>
+    </ul>
+    <div class="tokens" aria-label="Palette">
+      <span><i style="background:#050D2B"></i>sky 0</span><span><i style="background:#0A2470"></i>sky 1</span><span><i style="background:#1757E6"></i>sky 2</span><span><i style="background:#2F7BFF"></i>sky 3</span><span><i style="background:#0B1733"></i>ink</span><span><i style="background:#55637F"></i>ink 2</span><span><i style="background:#0F62E6"></i>blue</span><span><i style="background:#EAF1FF"></i>blue soft</span><span><i style="background:#F4F7FD"></i>paper 2</span><span><i style="background:#F2A14F"></i>orange</span><span><i style="background:#8DB6FF"></i>ring</span><span><i style="background:#1B9A62"></i>correct</span><span><i style="background:#D64545"></i>incorrect</span>
+    </div>
+  </section>
+
+  <section class="hub-sec" style="margin-bottom:24px">
+    <h2>Lovable handoff</h2>
+    <p class="lede"><a href="lovable-handoff-courses.zip">Download the zip</a> or <a href="https://github.com/amigostudios/learn-anything-course-pages/tree/main/lovable-handoff" target="_blank" rel="noopener">browse the source</a>: plain React components and one scoped stylesheet, written for the existing stack (TanStack Start, React 19, Tailwind v4, shadcn, lucide-react, recharts). The README carries the paste-ready prompt. No new dependencies.</p>
+    <div class="hand">
+      <pre>src/styles/courses.css        all styles, scoped under .la-app, la- prefixed
+src/components/site/          SiteHeader, SiteFooter, SkyBand, Starfield, PlanetMark
+src/components/library/       LibraryPage, CourseCard, ContinueStrip
+src/components/course/        CoursePage, CourseOutline, CourseSidebar, types
+src/components/lesson/        LessonShell, LessonTopBar, SegmentProgress, PlayerBar,
+                              LessonPlayer (logic kept, markup new), SegmentVisual,
+                              Quiz, LessonComplete, LessonsDrawer, GenerationLoader
+src/routes/*.example.tsx      how each route wires the components
+reference/                    the stills on this page</pre>
+      <ul>
+        <li><b>Re-style, not a rebuild.</b> Data loading, caching, progress, the audio pipeline and the ElevenLabs teacher stay as they are. Components take the data the routes already have.</li>
+        <li><b>LessonPlayer keeps its logic.</b> Audio element, word timings, keyboard shortcuts and the tap-to-play fallback are carried over line for line; only the rendered structure changes.</li>
+        <li><b>Quiz and GenerationLoader keep their props</b>, so the routes do not change their calls.</li>
+        <li><b>Type-checked</b> against React 19, @tanstack/react-router, lucide-react and recharts before packaging.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="la-foot">
+  <div class="la-wrap">
+    <p class="la-disclaimer">Prototype for review. Course content shown is the live site's own; progress and "continue" states are sample data.</p>
+    <p class="la-copy">Learn Anything · course pages redesign · built Oct 30, 2026 · <a href="https://github.com/amigostudios/learn-anything-course-pages" target="_blank" rel="noopener">source on GitHub</a></p>
+  </div>
+</footer>
+</div>
+
+<script src="assets/courses.js"></script>
+</body>
+</html>

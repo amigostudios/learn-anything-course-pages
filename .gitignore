@@ -1,0 +1,8 @@
+.DS_Store
+# local tooling and sources that are not part of the review site
+shoot.sh
+frame.html
+build-index.py
+course-pages-hub.html
+notes-local.md
+previews/src/

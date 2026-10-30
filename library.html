@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Free course library — Learn Anything</title>
+<meta name="description" content="Short, plain-language courses you can read and listen to right now.">
+<meta name="theme-color" content="#0A1C55">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/courses.css">
+</head>
+<body class="la-app" data-page="library">
+
+<header class="la-band">
+  <div class="la-sky" aria-hidden="true"><div class="la-sky-light"></div><canvas class="la-stars"></canvas></div>
+
+  <nav class="la-nav la-wrap" aria-label="Main">
+    <a class="la-brand" href="https://learn-anything-public.site/">
+      <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><defs><clipPath id="mk-nav"><rect x="-20" y="32" width="104" height="60"/></clipPath></defs><g transform="rotate(-18 32 32)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="rgba(255,255,255,.72)" stroke-width="3.2"/></g><circle cx="32" cy="32" r="15" fill="#fff"/><g transform="rotate(-18 32 32)" clip-path="url(#mk-nav)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="rgba(255,255,255,.72)" stroke-width="3.2"/><circle cx="8.6" cy="36" r="3.2" fill="#F2A14F" stroke="#fff" stroke-width="1.2"/></g></svg>
+      <span>Learn Anything</span>
+    </a>
+    <div class="la-nav-links">
+      <a href="library.html" aria-current="page">Library</a>
+      <a href="https://learn-anything-public.site/pricing">Pricing</a>
+      <a href="https://learn-anything-public.site/about">About</a>
+    </div>
+    <div class="la-nav-actions">
+      <a class="la-btn la-btn-ghost" href="https://learn-anything-public.site/account">Account</a>
+      <a class="la-btn la-btn-white" href="https://learn-anything-public.site/#learn">Start learning</a>
+      <button class="la-nav-menu" type="button" aria-expanded="false" aria-controls="menu-panel">Menu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/></svg></button>
+    </div>
+    <div class="la-menu-panel" id="menu-panel" hidden>
+      <a href="library.html">Library</a>
+      <a href="https://learn-anything-public.site/pricing">Pricing</a>
+      <a href="https://learn-anything-public.site/about">About</a>
+      <a href="https://learn-anything-public.site/account">Account</a>
+      <a href="https://learn-anything-public.site/#learn">Start learning</a>
+    </div>
+  </nav>
+
+  <div class="la-ph la-wrap">
+    <p class="la-eyebrow">Free library</p>
+    <h1 class="la-display">Ready-made courses, free to start.</h1>
+    <p class="la-lede">Short, plain-language courses you can read and listen to right now. The first lesson of every course is open, no account needed.</p>
+    <form class="la-search" role="search" onsubmit="return false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <label class="la-sr-only" for="la-q">Search the library</label>
+      <input id="la-q" type="text" inputmode="search" placeholder="Search the library" autocomplete="off" spellcheck="false">
+      <span class="la-search-count">11 courses</span>
+      <button class="la-search-clear" type="button" aria-label="Clear search"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </form>
+    <div class="la-filters" id="la-filters" role="group" aria-label="Filter by topic"></div>
+  </div>
+</header>
+
+<main class="la-wrap">
+  <section style="margin-top:44px">
+    <div class="la-sec-head">
+      <h2>Continue learning</h2>
+      <a href="https://learn-anything-public.site/">All your courses <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
+    <div class="la-continue" id="la-mine"></div>
+  </section>
+
+  <section style="margin-top:52px">
+    <div class="la-sec-head">
+      <h2>Everyday essentials</h2>
+      <p id="la-grid-count">11 courses</p>
+    </div>
+    <div class="la-grid-cards" id="la-grid"></div>
+    <p class="la-empty" id="la-empty">Nothing in the library matches that yet. Try another word, or <a href="https://learn-anything-public.site/#learn" style="color:var(--la-blue);font-weight:600">start a course on it</a>.</p>
+  </section>
+
+  <section class="la-promo">
+    <span class="la-ico"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><defs><clipPath id="mk-promo"><rect x="-20" y="32" width="104" height="60"/></clipPath></defs><g transform="rotate(-18 32 32)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/></g><circle cx="32" cy="32" r="15" fill="#0F62E6"/><g transform="rotate(-18 32 32)" clip-path="url(#mk-promo)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/><circle cx="8.6" cy="36" r="3.2" fill="#F2A14F" stroke="#fff" stroke-width="1.2"/></g></svg></span>
+    <div>
+      <h3>Don’t see your topic?</h3>
+      <p>Type anything on the home page and a course on it is ready in about 20 seconds.</p>
+    </div>
+    <a class="la-btn la-btn-ink la-btn-lg" href="https://learn-anything-public.site/#learn">Start a course <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+  </section>
+</main>
+
+<footer class="la-foot">
+  <div class="la-wrap">
+    <nav class="la-foot-links" aria-label="Footer">
+      <a class="la-brand" href="https://learn-anything-public.site/"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><defs><clipPath id="mk-foot"><rect x="-20" y="32" width="104" height="60"/></clipPath></defs><g transform="rotate(-18 32 32)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/></g><circle cx="32" cy="32" r="15" fill="#0F62E6"/><g transform="rotate(-18 32 32)" clip-path="url(#mk-foot)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/><circle cx="8.6" cy="36" r="3.2" fill="#F2A14F" stroke="#fff" stroke-width="1.2"/></g></svg>Learn Anything</a>
+      <a href="library.html">Library</a>
+      <a href="https://learn-anything-public.site/pricing">Pricing</a>
+      <a href="https://learn-anything-public.site/about">About</a>
+      <a href="https://learn-anything-public.site/account">Account</a>
+      <a href="https://learn-anything-public.site/terms">Terms</a>
+      <a href="https://learn-anything-public.site/privacy">Privacy</a>
+      <a href="https://learn-anything-public.site/contact">Contact</a>
+    </nav>
+    <p class="la-disclaimer">Lessons are generated by AI and can be wrong. Verify anything that matters — especially medical, legal, or financial guidance — with a qualified source.</p>
+    <p class="la-copy">© 2026 Learn Anything</p>
+  </div>
+</footer>
+
+<script src="assets/courses.js"></script>
+</body>
+</html>
