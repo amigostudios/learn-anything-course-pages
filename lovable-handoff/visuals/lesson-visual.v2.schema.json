@@ -1,0 +1,548 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "learn-anything/lesson-visual.v2",
+  "title": "Lesson segment (v2)",
+  "type": "object",
+  "required": [
+    "kind",
+    "heading",
+    "key_idea",
+    "body",
+    "visual"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "intro",
+        "concept",
+        "process",
+        "stat",
+        "practice",
+        "anatomy",
+        "summary",
+        "real object"
+      ]
+    },
+    "heading": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "key_idea": {
+      "type": "string",
+      "maxLength": 90
+    },
+    "body": {
+      "type": "string",
+      "maxLength": 420
+    },
+    "visual": {
+      "$ref": "#/$defs/visual"
+    }
+  },
+  "$defs": {
+    "visual": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/icon"
+        },
+        {
+          "$ref": "#/$defs/compare"
+        },
+        {
+          "$ref": "#/$defs/steps"
+        },
+        {
+          "$ref": "#/$defs/stat"
+        },
+        {
+          "$ref": "#/$defs/timeline"
+        },
+        {
+          "$ref": "#/$defs/dodont"
+        },
+        {
+          "$ref": "#/$defs/diagram"
+        },
+        {
+          "$ref": "#/$defs/definition"
+        },
+        {
+          "$ref": "#/$defs/rule"
+        },
+        {
+          "$ref": "#/$defs/photo"
+        }
+      ]
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 40,
+      "description": "Max 6 words"
+    },
+    "item": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "Max 10 words"
+    },
+    "caption": {
+      "type": "string",
+      "maxLength": 90,
+      "description": "Max 14 words"
+    },
+    "value": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "Digits as written, e.g. 2,000"
+    },
+    "icon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "icon",
+        "title",
+        "caption"
+      ],
+      "properties": {
+        "type": {
+          "const": "icon"
+        },
+        "icon": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "lucide icon name"
+        },
+        "title": {
+          "$ref": "#/$defs/label"
+        },
+        "caption": {
+          "$ref": "#/$defs/caption"
+        }
+      }
+    },
+    "compare": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "left",
+        "right"
+      ],
+      "properties": {
+        "type": {
+          "const": "compare"
+        },
+        "left": {
+          "$ref": "#/$defs/side"
+        },
+        "right": {
+          "$ref": "#/$defs/side"
+        },
+        "relation": {
+          "type": "string",
+          "maxLength": 8,
+          "description": "e.g. ×3. A multiple of 2-6 draws segment bars"
+        }
+      }
+    },
+    "side": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "value"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "value": {
+          "$ref": "#/$defs/value"
+        },
+        "unit": {
+          "$ref": "#/$defs/label"
+        }
+      }
+    },
+    "steps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "steps"
+      ],
+      "properties": {
+        "type": {
+          "const": "steps"
+        },
+        "title": {
+          "$ref": "#/$defs/label"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label"
+            ],
+            "properties": {
+              "label": {
+                "$ref": "#/$defs/label"
+              },
+              "note": {
+                "$ref": "#/$defs/label"
+              }
+            }
+          }
+        }
+      }
+    },
+    "stat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value",
+        "unit",
+        "source"
+      ],
+      "properties": {
+        "type": {
+          "const": "stat"
+        },
+        "value": {
+          "$ref": "#/$defs/value"
+        },
+        "unit": {
+          "$ref": "#/$defs/label"
+        },
+        "caption": {
+          "$ref": "#/$defs/caption"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "title",
+            "url"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxLength": 40,
+              "description": "Publisher, e.g. U.S. FDA"
+            },
+            "title": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https://"
+            }
+          }
+        }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "events"
+      ],
+      "properties": {
+        "type": {
+          "const": "timeline"
+        },
+        "title": {
+          "$ref": "#/$defs/label"
+        },
+        "events": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 7,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label"
+            ],
+            "properties": {
+              "label": {
+                "$ref": "#/$defs/label"
+              },
+              "note": {
+                "$ref": "#/$defs/label"
+              },
+              "duration": {
+                "type": "string",
+                "maxLength": 16,
+                "description": "Only when the narration states it"
+              }
+            }
+          }
+        }
+      }
+    },
+    "dodont": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "do",
+        "dont"
+      ],
+      "properties": {
+        "type": {
+          "const": "dodont"
+        },
+        "title": {
+          "$ref": "#/$defs/label"
+        },
+        "do": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        },
+        "dont": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        }
+      }
+    },
+    "diagram": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "template",
+        "callouts"
+      ],
+      "properties": {
+        "type": {
+          "const": "diagram"
+        },
+        "template": {
+          "enum": [
+            "us-nutrition-facts"
+          ],
+          "description": "Key in the reviewed diagram library"
+        },
+        "callouts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "anchor",
+              "label"
+            ],
+            "properties": {
+              "anchor": {
+                "type": "string",
+                "description": "Anchor id defined by the template"
+              },
+              "label": {
+                "$ref": "#/$defs/label"
+              },
+              "note": {
+                "$ref": "#/$defs/label"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "term",
+        "definition"
+      ],
+      "properties": {
+        "type": {
+          "const": "definition"
+        },
+        "term": {
+          "$ref": "#/$defs/label"
+        },
+        "definition": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "example": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "meter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value",
+            "max"
+          ],
+          "properties": {
+            "value": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "scale",
+        "zones"
+      ],
+      "properties": {
+        "type": {
+          "const": "rule"
+        },
+        "title": {
+          "$ref": "#/$defs/label"
+        },
+        "scale": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            },
+            "unit": {
+              "type": "string",
+              "maxLength": 4
+            }
+          }
+        },
+        "zones": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "tone"
+            ],
+            "properties": {
+              "from": {
+                "type": "number"
+              },
+              "to": {
+                "type": "number"
+              },
+              "label": {
+                "$ref": "#/$defs/label"
+              },
+              "tone": {
+                "enum": [
+                  "good",
+                  "neutral",
+                  "caution"
+                ]
+              }
+            }
+          }
+        },
+        "marker": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value",
+            "label"
+          ],
+          "properties": {
+            "value": {
+              "type": "number"
+            },
+            "label": {
+              "$ref": "#/$defs/label"
+            }
+          }
+        }
+      }
+    },
+    "photo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "query",
+        "caption",
+        "reason"
+      ],
+      "properties": {
+        "type": {
+          "const": "photo"
+        },
+        "query": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Pexels search terms"
+        },
+        "caption": {
+          "$ref": "#/$defs/caption"
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Why the learner must see the real object"
+        },
+        "credit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "provider",
+            "photographer",
+            "url"
+          ],
+          "description": "Filled by the app from the Pexels API, never by the model",
+          "properties": {
+            "provider": {
+              "const": "Pexels"
+            },
+            "photographer": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "$schema": "./lesson-visual.v2.schema.json",
+  "note": "Ten valid segments, one per visual type, taken from the prototype. Use as renderer fixtures and generator few-shot examples.",
+  "segments": [
+    {
+      "kind": "intro",
+      "heading": "Read the label from the top",
+      "key_idea": "Every number on the label is for one serving.",
+      "body": "Before calories, sugar or protein, find the serving size at the top of the panel. Everything beneath it describes that one amount, so if you eat more, every number grows with it.",
+      "visual": {
+        "type": "icon",
+        "icon": "target",
+        "title": "Start Here",
+        "caption": "The serving size dictates all other values."
+      }
+    },
+    {
+      "kind": "concept",
+      "heading": "One bag, three servings",
+      "key_idea": "Multiply by the servings you actually eat.",
+      "body": "The label lists calories for one serving. This bag holds three, so finishing it means three times the calories, sugar and sodium shown.",
+      "visual": {
+        "type": "compare",
+        "left": {
+          "label": "LABEL SAYS",
+          "value": "200",
+          "unit": "Calories (1 serving)"
+        },
+        "right": {
+          "label": "REALITY",
+          "value": "600",
+          "unit": "Calories (whole 3-serving bag)"
+        },
+        "relation": "×3"
+      }
+    },
+    {
+      "kind": "process",
+      "heading": "Your 60-second label scan",
+      "key_idea": "Same five checks, same order, every time.",
+      "body": "Serving size, calories, added sugars and sodium, the 5/20 rule, then the ingredient list. Run them in that order and any label takes about a minute.",
+      "visual": {
+        "type": "steps",
+        "title": "The 60-second scan",
+        "steps": [
+          {
+            "label": "Serving size"
+          },
+          {
+            "label": "Calories per serving"
+          },
+          {
+            "label": "Added sugars + sodium"
+          },
+          {
+            "label": "% Daily Value",
+            "note": "5/20 rule"
+          },
+          {
+            "label": "Ingredient order"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "stat",
+      "heading": "Where % Daily Value comes from",
+      "key_idea": "Every %DV is measured against a 2,000-calorie day.",
+      "body": "The percentages on the label assume a 2,000-calorie diet. Your own needs may be higher or lower, so treat %DV as a yardstick for comparing foods, not a personal target.",
+      "visual": {
+        "type": "stat",
+        "value": "2,000",
+        "unit": "calories per day",
+        "caption": "the reference intake behind every % Daily Value",
+        "source": {
+          "name": "U.S. FDA",
+          "title": "How to Understand and Use the Nutrition Facts Label",
+          "url": "https://www.fda.gov/food/nutrition-facts-label/how-understand-and-use-nutrition-facts-label"
+        }
+      }
+    },
+    {
+      "kind": "process",
+      "heading": "From accepted offer to keys",
+      "key_idea": "Each stage has to clear before the next can start.",
+      "body": "Once your offer is accepted, the lender verifies your finances and the property. Underwriting usually takes two to six weeks; after the appraisal and final approval, you sign and get the keys.",
+      "visual": {
+        "type": "timeline",
+        "title": "How a mortgage closes",
+        "events": [
+          {
+            "label": "Pre-approval",
+            "note": "Know your budget"
+          },
+          {
+            "label": "Offer accepted",
+            "note": "Contract signed"
+          },
+          {
+            "label": "Underwriting",
+            "duration": "2-6 weeks"
+          },
+          {
+            "label": "Appraisal",
+            "note": "Home’s value checked"
+          },
+          {
+            "label": "Clear to close",
+            "note": "Final approval"
+          },
+          {
+            "label": "Signing & keys",
+            "note": "The home is yours"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "practice",
+      "heading": "Read the back, not the front",
+      "key_idea": "Ingredients are listed by weight, heaviest first.",
+      "body": "The front of the pack is there to sell. The ingredient list tells you what is actually inside, and sugar can appear under several different names.",
+      "visual": {
+        "type": "dodont",
+        "title": "Reading the ingredient list",
+        "do": [
+          "Scan the first three ingredients",
+          "Look for hidden sugar names (dextrose, cane syrup)",
+          "Compare per 100 g when sizes differ"
+        ],
+        "dont": [
+          "Trust ‘natural’ or ‘light’ claims",
+          "Judge by the front of the pack",
+          "Ignore the number of servings"
+        ]
+      }
+    },
+    {
+      "kind": "anatomy",
+      "heading": "Anatomy of the label",
+      "key_idea": "Four parts do most of the work.",
+      "body": "The serving size sets the amount, calories show the energy in it, added sugars flag what was put in during processing, and the % Daily Value column tells you whether each amount is a little or a lot.",
+      "visual": {
+        "type": "diagram",
+        "template": "us-nutrition-facts",
+        "callouts": [
+          {
+            "anchor": "serving-size",
+            "label": "Serving size",
+            "note": "Every number is per this"
+          },
+          {
+            "anchor": "calories",
+            "label": "Calories",
+            "note": "Energy in one serving"
+          },
+          {
+            "anchor": "added-sugars",
+            "label": "Added Sugars",
+            "note": "Added in processing"
+          },
+          {
+            "anchor": "daily-value",
+            "label": "% Daily Value",
+            "note": "Share of a day’s amount"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "concept",
+      "heading": "What %DV actually means",
+      "key_idea": "It is a share of a whole day, per serving.",
+      "body": "The % Daily Value turns grams and milligrams into a percentage you can compare at a glance. It is based on a 2,000-calorie diet, so it is a reference point, not a personal prescription.",
+      "visual": {
+        "type": "definition",
+        "term": "% Daily Value (%DV)",
+        "definition": "How much of a day’s recommended amount one serving gives you, based on a 2,000-calorie diet.",
+        "example": "20% DV of sodium = one fifth of your day’s salt in one serving.",
+        "meter": {
+          "value": 20,
+          "max": 100
+        }
+      }
+    },
+    {
+      "kind": "practice",
+      "heading": "Low, high, or in between",
+      "key_idea": "5% DV or less is low. 20% DV or more is high.",
+      "body": "Use the 5/20 rule on any nutrient with a %DV. At 12%, this cereal’s sodium sits between the two: worth noticing, especially if you have more than one serving.",
+      "visual": {
+        "type": "rule",
+        "title": "The 5/20 rule",
+        "scale": {
+          "min": 0,
+          "max": 25,
+          "unit": "%"
+        },
+        "zones": [
+          {
+            "to": 5,
+            "label": "≤5% = low",
+            "tone": "good"
+          },
+          {
+            "from": 20,
+            "label": "≥20% = high",
+            "tone": "caution"
+          }
+        ],
+        "marker": {
+          "value": 12,
+          "label": "this cereal’s sodium"
+        }
+      }
+    },
+    {
+      "kind": "concept",
+      "heading": "Spot a dual-column label",
+      "key_idea": "One column per serving, one for the whole package.",
+      "body": "Some packages that could be eaten in one sitting or several show two columns: one for a single serving and one for the entire package, so you don’t have to do the math.",
+      "visual": {
+        "type": "photo",
+        "query": "nutrition facts label two columns family size bag",
+        "caption": "A dual-column label on a family-size bag",
+        "reason": "Learners need to recognise the two-column layout on a real package.",
+        "credit": {
+          "provider": "Pexels",
+          "photographer": "Photographer name",
+          "url": "https://www.pexels.com/"
+        }
+      }
+    }
+  ]
+}

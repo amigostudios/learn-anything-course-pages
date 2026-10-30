@@ -25,7 +25,7 @@
     <div class="la-lbar-right">
       <span class="la-ai-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>AI-generated · verify anything you’d act on</span>
       <button class="la-pillbtn" id="la-lessons-btn" type="button" aria-expanded="false" aria-controls="la-drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01"/><path d="M3 18h.01"/><path d="M3 6h.01"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M8 6h13"/></svg><span>Lessons</span></button>
-      <button class="la-ask-btn" type="button" data-ask aria-label="Ask the teacher"><span class="la-orb" aria-hidden="true"></span><span>Ask the teacher</span></button>
+      <button class="la-ask-btn" type="button" data-ask aria-label="Ask the teacher"><span class="la-ask-mark" aria-hidden="true"><svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><defs><clipPath id="mk-ask"><rect x="-20" y="32" width="104" height="60"/></clipPath></defs><g transform="rotate(-18 32 32)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/></g><circle cx="32" cy="32" r="15" fill="#0F62E6"/><g transform="rotate(-18 32 32)" clip-path="url(#mk-ask)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/><circle cx="8.6" cy="36" r="3.2" fill="#F2A14F" stroke="#fff" stroke-width="1.2"/></g></svg></span><span>Ask the teacher</span></button>
     </div>
   </header>
 
@@ -38,9 +38,10 @@
 
   <main class="la-lmain">
     <div class="la-lcol" id="la-lcol">
-      <div class="la-stage" id="la-stage"></div>
+      <div class="la-slot"><div class="la-stage" id="la-stage"></div></div>
       <p class="la-cap" id="la-cap"></p>
       <h1 class="la-lh" id="la-lh"></h1>
+      <p class="la-key" id="la-key"></p>
       <p class="la-nar" id="la-nar" title="Tap to show all the text"></p>
       <p class="la-nar-hint" id="la-nar-hint"><span class="la-kbd">Space</span> play or pause &nbsp;·&nbsp; <span class="la-kbd">←</span><span class="la-kbd">→</span> move between parts</p>
     </div>

@@ -3,6 +3,11 @@ import { CircleCheck, Sparkles } from "lucide-react";
 const TYPE_LABEL: Record<string, string> = {
   intro: "Intro",
   concept: "Concept",
+  process: "Process",
+  stat: "Stat",
+  practice: "Practice",
+  anatomy: "Anatomy",
+  "real object": "Real object",
   steps: "Steps",
   comparison: "Compare",
   example: "Example",

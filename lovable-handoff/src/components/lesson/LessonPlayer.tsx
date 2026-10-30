@@ -1,15 +1,23 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Play } from "lucide-react";
-import { SegmentVisualRenderer, isFullBleed, stageCaption, type SegmentVisual } from "./SegmentVisual";
+import { SegmentVisualRenderer, stageCaption, stageClass, type AnyVisual } from "./SegmentVisual";
 import { VisualErrorBoundary } from "@/components/VisualErrorBoundary";
 import { SegmentProgress } from "./SegmentProgress";
 import { PlayerBar, SPEED_OPTIONS, type Speed } from "./PlayerBar";
 
+/** A lesson segment. v2 lessons carry `kind`, `key_idea` and `body`; the store keeps `narration` for the audio pipeline. */
 export interface LessonSegment {
-  type: string;
+  /** v1 segment type (intro, concept, steps, comparison, visual, summary). */
+  type?: string;
+  /** v2 segment kind (intro, concept, process, stat, practice, anatomy, summary, real object). */
+  kind?: string;
   heading: string;
-  narration: string;
-  visual: SegmentVisual;
+  /** v2: one sentence, max 90 characters, shown under the heading. */
+  key_idea?: string;
+  narration?: string;
+  /** v2 name for the narration text; used when `narration` is absent. */
+  body?: string;
+  visual: AnyVisual;
 }
 
 interface KeyConcept {
@@ -54,7 +62,8 @@ export function LessonPlayer({ segments, audioBySegment, wordTimingsBySegment, o
   const lastScrolledWordRef = useRef<number>(-1);
 
   const segment = segments[currentIndex];
-  const words = segment ? segment.narration.split(/\s+/).filter(Boolean) : [];
+  const narration = segment ? (segment.narration ?? segment.body ?? "") : "";
+  const words = narration.split(/\s+/).filter(Boolean);
   const audio64 = audioBySegment[currentIndex];
   const wordTimings = wordTimingsBySegment?.[currentIndex] ?? null;
   const isLastSegment = currentIndex === segments.length - 1;
@@ -226,11 +235,12 @@ export function LessonPlayer({ segments, audioBySegment, wordTimingsBySegment, o
 
   return (
     <>
-      <SegmentProgress total={segments.length} current={currentIndex} progress={audioProgress} type={segment.type} />
+      <SegmentProgress total={segments.length} current={currentIndex} progress={audioProgress} type={segment.kind ?? segment.type ?? ""} />
 
       <div ref={scrollRef} className="la-lmain">
         <div className="la-lcol" key={currentIndex}>
-          <div className={"la-stage" + (isFullBleed(segment.visual) ? " is-img" : "")}>
+          <div className="la-slot">
+            <div className={stageClass(segment.visual)}>
             <VisualErrorBoundary>
               <SegmentVisualRenderer visual={segment.visual} />
             </VisualErrorBoundary>
@@ -244,9 +254,11 @@ export function LessonPlayer({ segments, audioBySegment, wordTimingsBySegment, o
                 </span>
               </button>
             )}
+            </div>
           </div>
           {caption && <p className="la-cap">{caption}</p>}
           <h1 className="la-lh">{segment.heading}</h1>
+          {segment.key_idea && <p className="la-key">{segment.key_idea}</p>}
           <p className="la-nar" onClick={skipReveal} title="Tap to show all the text">
             {words.map((word, i) => {
               const isActive = i === Math.max(0, revealedWords - 1);

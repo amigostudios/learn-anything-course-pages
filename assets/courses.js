@@ -10,6 +10,10 @@
   /* ---------------- icons (lucide paths) ---------------- */
   var I = {
     'chevron-left': '<path d="m15 18-6-6 6-6"/>',
+    'chevron-down': '<path d="m6 9 6 6 6-6"/>',
+    image: '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
+    braces: '<path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/>',
+    hand: '<path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
     'chevron-right': '<path d="m9 18 6-6-6-6"/>',
     'arrow-right': '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
     'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
@@ -51,6 +55,9 @@
   };
   function ico(name, cls) {
     return '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (I[name] || '') + '</svg>';
+  }
+  function planet(id, size) {
+    return '<svg viewBox="0 0 64 64" width="' + size + '" height="' + size + '" aria-hidden="true"><defs><clipPath id="' + id + '"><rect x="-20" y="32" width="104" height="60"/></clipPath></defs><g transform="rotate(-18 32 32)"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/></g><circle cx="32" cy="32" r="15" fill="#0F62E6"/><g transform="rotate(-18 32 32)" clip-path="url(#' + id + ')"><ellipse cx="32" cy="32" rx="27" ry="8" fill="none" stroke="#8DB6FF" stroke-width="3.2"/><circle cx="8.6" cy="36" r="3.2" fill="#F2A14F" stroke="#fff" stroke-width="1.2"/></g></svg>';
   }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -116,12 +123,13 @@
     id: '0-0', title: 'The Pinch Grip', number: 1, module: 'Foundation and Safety',
     next: { id: '0-1', title: "The 'Claw' Hand" },
     segments: [
-      { type: 'intro', heading: 'Why Your Grip Matters', narration: 'Most beginners hold a knife like a hammer, with their hand entirely on the handle. While it feels natural, this actually gives you less control and causes your hand to tire quickly. Today, we are learning the professional standard: the pinch grip.', visual: { kind: 'image', src: 'img/lesson-grip.jpg', alt: 'A chef expertly slicing vegetables with a professional grip', caption: 'Control starts with how you hold the tool.' } },
-      { type: 'concept', heading: 'The Anatomy of the Grip', narration: "The secret to the pinch grip is shifting your hand forward. Instead of just holding the handle, you will use your thumb and index finger to 'pinch' the blade itself, right where it meets the handle. This area is called the bolster.", visual: { kind: 'icon', name: 'target', label: 'Precision Point', caption: 'Focus your grip on the bolster for maximum stability.' } },
-      { type: 'steps', heading: 'Three Steps to a Pro Grip', narration: "Let's break it down. First, pinch the blade between your thumb and the side of your index finger. Second, curl your remaining three fingers comfortably around the handle. Finally, relax your wrist to allow the knife to do the work.", visual: { kind: 'steps', items: ['Pinch the blade bolster with thumb and index finger.', 'Wrap the other three fingers around the handle.', "Keep a firm but relaxed hold; don't squeeze too hard."] } },
-      { type: 'comparison', heading: 'Handle Grip vs. Pinch Grip', narration: 'When you hold only the handle, the blade can wobble left or right, leading to uneven cuts or slips. The pinch grip turns the knife into an extension of your arm, providing a pivot point that makes every slice more predictable.', visual: { kind: 'comparison', left: { label: 'Handle grip', text: 'Unstable, less leverage, higher fatigue.' }, right: { label: 'Pinch grip', text: 'Maximum control, better balance, safer cuts.' } } },
-      { type: 'visual', heading: 'Safety in Stability', narration: 'Stability is the foundation of kitchen safety. By securing the blade at the bolster, you prevent the knife from rolling in your hand. This significantly reduces the risk of accidental nicks or deeper cuts during heavy-duty tasks like dicing carrots.', visual: { kind: 'emoji', emoji: '🛡️', caption: 'Stability equals safety.' } },
-      { type: 'summary', heading: 'Ready to Slice', narration: 'Mastering this grip is the single biggest step you can take toward cooking like a professional. It might feel strange at first, but with practice, it will become second nature, making your prep work faster and much safer.', visual: { kind: 'callout', text: 'The knife should feel like an extension of your hand, not a separate tool.' } }
+      /* v2 segment format (lesson-visual.v2.schema.json): kind, heading, key_idea, body, visual{type…}. Narration text is the live lesson's; key ideas restate it. */
+      { kind: 'intro', heading: 'Why Your Grip Matters', key_idea: 'Holding only the handle gives you less control and tires your hand.', body: 'Most beginners hold a knife like a hammer, with their hand entirely on the handle. While it feels natural, this actually gives you less control and causes your hand to tire quickly. Today, we are learning the professional standard: the pinch grip.', visual: { type: 'photo', query: 'chef pinch grip knife cutting board', caption: 'Control starts with how you hold the tool.', reason: 'Learners need to see where the hand sits on a real knife.', credit: { provider: 'Pexels', photographer: 'Pexels contributor', url: 'https://www.pexels.com/' }, _src: 'img/lesson-grip.jpg' } },
+      { kind: 'concept', heading: 'The Anatomy of the Grip', key_idea: 'Pinch the blade where it meets the handle: the bolster.', body: "The secret to the pinch grip is shifting your hand forward. Instead of just holding the handle, you will use your thumb and index finger to 'pinch' the blade itself, right where it meets the handle. This area is called the bolster.", visual: { type: 'definition', term: 'Bolster', definition: 'The thick band where the blade meets the handle. The pinch grip holds the blade here, not the handle.', example: 'Thumb on one side of the blade, the side of your index finger on the other, just ahead of the handle.' } },
+      { kind: 'process', heading: 'Three Steps to a Pro Grip', key_idea: 'Pinch, wrap, relax.', body: "Let's break it down. First, pinch the blade between your thumb and the side of your index finger. Second, curl your remaining three fingers comfortably around the handle. Finally, relax your wrist to allow the knife to do the work.", visual: { type: 'steps', title: 'The pinch grip in three moves', steps: [{ label: 'Pinch the blade', note: 'thumb and side of the index finger' }, { label: 'Wrap the handle', note: 'the other three fingers' }, { label: 'Relax the wrist', note: 'let the knife do the work' }] } },
+      { kind: 'practice', heading: 'Handle Grip vs. Pinch Grip', key_idea: 'A pinched blade pivots predictably; a held handle wobbles.', body: 'When you hold only the handle, the blade can wobble left or right, leading to uneven cuts or slips. The pinch grip turns the knife into an extension of your arm, providing a pivot point that makes every slice more predictable.', visual: { type: 'dodont', title: 'Holding the knife', do: ['Pinch the blade at the bolster', 'Let the knife pivot from your grip', 'Expect even, predictable slices'], dont: ['Hold the handle alone', 'Let the blade wobble left or right', 'Accept uneven cuts or slips'] } },
+      { kind: 'concept', heading: 'Safety in Stability', key_idea: 'A blade secured at the bolster cannot roll in your hand.', body: 'Stability is the foundation of kitchen safety. By securing the blade at the bolster, you prevent the knife from rolling in your hand. This significantly reduces the risk of accidental nicks or deeper cuts during heavy-duty tasks like dicing carrots.', visual: { type: 'icon', icon: 'shield-check', title: 'Stability is safety', caption: 'Securing the blade at the bolster stops the knife rolling in your hand.' } },
+      { kind: 'summary', heading: 'Ready to Slice', key_idea: 'With practice the grip becomes second nature: faster prep, safer hands.', body: 'Mastering this grip is the single biggest step you can take toward cooking like a professional. It might feel strange at first, but with practice, it will become second nature, making your prep work faster and much safer.', visual: { type: 'definition', term: 'Pinch grip', definition: 'Thumb and index finger pinch the blade at the bolster; the other three fingers wrap the handle.', example: 'The knife should feel like an extension of your hand, not a separate tool.' } }
     ],
     quiz: [
       { question: 'Where should your thumb and index finger be placed in a proper pinch grip?', options: ["On the blade's bolster", 'At the very end of the handle', 'Directly on the sharp edge', 'Tucked into your palm'], correct: 0, explanation: 'Pinching the bolster provides the pivot point necessary for control and stability.' },
@@ -134,7 +142,7 @@
       { term: 'Stability', definition: 'A blade that cannot roll in your hand is what prevents slips and uneven cuts.' }
     ]
   };
-  var TYPE_LABEL = { intro: 'Intro', concept: 'Concept', steps: 'Steps', comparison: 'Compare', visual: 'Visual', summary: 'Summary', quiz: 'Quiz' };
+  var TYPE_LABEL = { intro: 'Intro', concept: 'Concept', process: 'Process', stat: 'Stat', practice: 'Practice', anatomy: 'Anatomy', summary: 'Summary', 'real object': 'Real object' };
 
   /* ---------------- starfield (same engine as the home page, band variant) ---------------- */
   function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -307,28 +315,97 @@
   }
 
   /* ---------------- lesson page ---------------- */
+  /* ---- lesson visual system v2: ten typed cards (lesson-visual.v2.schema.json) ---- */
+  var SAMPLES = [{"kind": "intro", "heading": "Read the label from the top", "key_idea": "Every number on the label is for one serving.", "body": "Before calories, sugar or protein, find the serving size at the top of the panel. Everything beneath it describes that one amount, so if you eat more, every number grows with it.", "visual": {"type": "icon", "icon": "target", "title": "Start Here", "caption": "The serving size dictates all other values."}}, {"kind": "concept", "heading": "One bag, three servings", "key_idea": "Multiply by the servings you actually eat.", "body": "The label lists calories for one serving. This bag holds three, so finishing it means three times the calories, sugar and sodium shown.", "visual": {"type": "compare", "left": {"label": "LABEL SAYS", "value": "200", "unit": "Calories (1 serving)"}, "right": {"label": "REALITY", "value": "600", "unit": "Calories (whole 3-serving bag)"}, "relation": "×3"}}, {"kind": "process", "heading": "Your 60-second label scan", "key_idea": "Same five checks, same order, every time.", "body": "Serving size, calories, added sugars and sodium, the 5/20 rule, then the ingredient list. Run them in that order and any label takes about a minute.", "visual": {"type": "steps", "title": "The 60-second scan", "steps": [{"label": "Serving size"}, {"label": "Calories per serving"}, {"label": "Added sugars + sodium"}, {"label": "% Daily Value", "note": "5/20 rule"}, {"label": "Ingredient order"}]}}, {"kind": "stat", "heading": "Where % Daily Value comes from", "key_idea": "Every %DV is measured against a 2,000-calorie day.", "body": "The percentages on the label assume a 2,000-calorie diet. Your own needs may be higher or lower, so treat %DV as a yardstick for comparing foods, not a personal target.", "visual": {"type": "stat", "value": "2,000", "unit": "calories per day", "caption": "the reference intake behind every % Daily Value", "source": {"name": "U.S. FDA", "title": "How to Understand and Use the Nutrition Facts Label", "url": "https://www.fda.gov/food/nutrition-facts-label/how-understand-and-use-nutrition-facts-label"}}}, {"kind": "process", "heading": "From accepted offer to keys", "key_idea": "Each stage has to clear before the next can start.", "body": "Once your offer is accepted, the lender verifies your finances and the property. Underwriting usually takes two to six weeks; after the appraisal and final approval, you sign and get the keys.", "visual": {"type": "timeline", "title": "How a mortgage closes", "events": [{"label": "Pre-approval", "note": "Know your budget"}, {"label": "Offer accepted", "note": "Contract signed"}, {"label": "Underwriting", "duration": "2-6 weeks"}, {"label": "Appraisal", "note": "Home’s value checked"}, {"label": "Clear to close", "note": "Final approval"}, {"label": "Signing & keys", "note": "The home is yours"}]}}, {"kind": "practice", "heading": "Read the back, not the front", "key_idea": "Ingredients are listed by weight, heaviest first.", "body": "The front of the pack is there to sell. The ingredient list tells you what is actually inside, and sugar can appear under several different names.", "visual": {"type": "dodont", "title": "Reading the ingredient list", "do": ["Scan the first three ingredients", "Look for hidden sugar names (dextrose, cane syrup)", "Compare per 100 g when sizes differ"], "dont": ["Trust ‘natural’ or ‘light’ claims", "Judge by the front of the pack", "Ignore the number of servings"]}}, {"kind": "anatomy", "heading": "Anatomy of the label", "key_idea": "Four parts do most of the work.", "body": "The serving size sets the amount, calories show the energy in it, added sugars flag what was put in during processing, and the % Daily Value column tells you whether each amount is a little or a lot.", "visual": {"type": "diagram", "template": "us-nutrition-facts", "callouts": [{"anchor": "serving-size", "label": "Serving size", "note": "Every number is per this"}, {"anchor": "calories", "label": "Calories", "note": "Energy in one serving"}, {"anchor": "added-sugars", "label": "Added Sugars", "note": "Added in processing"}, {"anchor": "daily-value", "label": "% Daily Value", "note": "Share of a day’s amount"}]}}, {"kind": "concept", "heading": "What %DV actually means", "key_idea": "It is a share of a whole day, per serving.", "body": "The % Daily Value turns grams and milligrams into a percentage you can compare at a glance. It is based on a 2,000-calorie diet, so it is a reference point, not a personal prescription.", "visual": {"type": "definition", "term": "% Daily Value (%DV)", "definition": "How much of a day’s recommended amount one serving gives you, based on a 2,000-calorie diet.", "example": "20% DV of sodium = one fifth of your day’s salt in one serving.", "meter": {"value": 20, "max": 100}}}, {"kind": "practice", "heading": "Low, high, or in between", "key_idea": "5% DV or less is low. 20% DV or more is high.", "body": "Use the 5/20 rule on any nutrient with a %DV. At 12%, this cereal’s sodium sits between the two: worth noticing, especially if you have more than one serving.", "visual": {"type": "rule", "title": "The 5/20 rule", "scale": {"min": 0, "max": 25, "unit": "%"}, "zones": [{"to": 5, "label": "≤5% = low", "tone": "good"}, {"from": 20, "label": "≥20% = high", "tone": "caution"}], "marker": {"value": 12, "label": "this cereal’s sodium"}}}, {"kind": "concept", "heading": "Spot a dual-column label", "key_idea": "One column per serving, one for the whole package.", "body": "Some packages that could be eaten in one sitting or several show two columns: one for a single serving and one for the entire package, so you don’t have to do the math.", "visual": {"type": "photo", "query": "nutrition facts label two columns family size bag", "caption": "A dual-column label on a family-size bag", "reason": "Learners need to recognise the two-column layout on a real package.", "credit": {"provider": "Pexels", "photographer": "Photographer name", "url": "https://www.pexels.com/"}}}];
+  var DIAGRAMS = {
+    'us-nutrition-facts': {
+      svg: "<svg class=\"la-nf\" viewBox=\"0 0 240 280\" role=\"img\" aria-labelledby=\"la-nf-title\"><title id=\"la-nf-title\">Simplified U.S. Nutrition Facts label using the FDA sample values for frozen lasagna, with four numbered callouts</title><rect x=\".75\" y=\".75\" width=\"238.5\" height=\"278.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"1.5\"/><g fill=\"#111\" font-family=\"Inter, system-ui, sans-serif\"><text x=\"8\" y=\"30\" font-family=\"'Inter Tight', Inter, sans-serif\" font-size=\"27\" font-weight=\"800\" textLength=\"224\" lengthAdjust=\"spacingAndGlyphs\">Nutrition Facts</text><rect x=\"8\" y=\"36.5\" width=\"224\" height=\".8\"/><text x=\"8\" y=\"50\" font-size=\"10.5\">4 servings per container</text><text x=\"8\" y=\"65\" font-size=\"12.5\" font-weight=\"700\">Serving size</text><text x=\"232\" y=\"65\" font-size=\"12.5\" font-weight=\"700\" text-anchor=\"end\">1 cup</text><rect x=\"8\" y=\"71\" width=\"224\" height=\"8\"/><text x=\"8\" y=\"91\" font-size=\"9\" font-weight=\"700\">Amount per serving</text><text x=\"8\" y=\"114\" font-family=\"'Inter Tight', Inter, sans-serif\" font-size=\"23\" font-weight=\"800\">Calories</text><text x=\"232\" y=\"114\" font-family=\"'Inter Tight', Inter, sans-serif\" font-size=\"31\" font-weight=\"800\" text-anchor=\"end\">280</text><rect x=\"8\" y=\"119\" width=\"224\" height=\"4.5\"/><text x=\"232\" y=\"134\" font-size=\"9\" font-weight=\"700\" text-anchor=\"end\">% Daily Value*</text><rect x=\"8\" y=\"138\" width=\"224\" height=\".8\"/><text x=\"8\" y=\"150\" font-size=\"10.5\"><tspan font-weight=\"700\">Total Fat</tspan> 9g</text><text x=\"232\" y=\"150\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"end\">12%</text><rect x=\"8\" y=\"153.5\" width=\"224\" height=\".8\"/><text x=\"8\" y=\"165.5\" font-size=\"10.5\"><tspan font-weight=\"700\">Sodium</tspan> 850mg</text><text x=\"232\" y=\"165.5\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"end\">37%</text><rect x=\"8\" y=\"169\" width=\"224\" height=\".8\"/><text x=\"8\" y=\"181\" font-size=\"10.5\"><tspan font-weight=\"700\">Total Carbohydrate</tspan> 34g</text><text x=\"232\" y=\"181\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"end\">12%</text><rect x=\"8\" y=\"184.5\" width=\"224\" height=\".8\"/><text x=\"18\" y=\"196.5\" font-size=\"10.5\">Total Sugars 6g</text><rect x=\"28\" y=\"200\" width=\"204\" height=\".8\"/><text x=\"28\" y=\"212\" font-size=\"10.5\">Includes 0g Added Sugars</text><text x=\"232\" y=\"212\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"end\">0%</text><rect x=\"8\" y=\"215.5\" width=\"224\" height=\".8\"/><text x=\"8\" y=\"227.5\" font-size=\"10.5\"><tspan font-weight=\"700\">Protein</tspan> 15g</text><rect x=\"8\" y=\"232\" width=\"224\" height=\"7\"/><text font-size=\"7.4\"><tspan x=\"8\" y=\"250\">* The % Daily Value (DV) tells you how much a nutrient</tspan><tspan x=\"8\" y=\"259.5\">in a serving of food contributes to a daily diet. 2,000</tspan><tspan x=\"8\" y=\"269\">calories a day is used for general nutrition advice.</tspan></text></g></svg>",
+      anchors: { 'serving-size': { side: 'l', y: '21.8%' }, calories: { side: 'l', y: '37.5%' }, 'added-sugars': { side: 'l', y: '74.5%' }, 'daily-value': { side: 'r', y: '46.8%' } },
+      source: 'Sample values: U.S. FDA label for frozen lasagna'
+    }
+  };
+  function fmtNum(n, unit) { var s = (Math.round(n * 100) / 100).toString(); return unit ? s + unit : s; }
+  function hasTitle(v) { return !!v.title; }
+  function stageClass(v) {
+    return 'la-stage is-v2 la-v2-' + v.type + (hasTitle(v) ? ' la-has-title' : '') + (v.type === 'photo' && v._src ? ' has-img' : '');
+  }
+  function photoCaption(v) {
+    if (v.type !== 'photo' || !v._src) return '';
+    return esc(v.caption) + (v.credit ? ' <span>Photo: <a href="' + esc(v.credit.url) + '" target="_blank" rel="noopener noreferrer">' + esc(v.credit.provider) + '</a> · ' + esc(v.credit.photographer) + '</span>' : '');
+  }
   function visualHTML(v) {
-    switch (v.kind) {
-      case 'image': return '<img src="' + v.src + '" alt="' + esc(v.alt || '') + '">';
-      case 'icon': return '<div class="la-glow"></div><div class="la-v-icon"><span class="la-tile-ico">' + ico(v.name) + '</span>' + (v.label ? '<span class="la-v-label">' + esc(v.label) + '</span>' : '') + (v.caption ? '<span class="la-v-sub">' + esc(v.caption) + '</span>' : '') + '</div>';
-      case 'emoji': return '<div class="la-glow"></div><div class="la-v-emoji"><span class="la-emoji" aria-hidden="true">' + v.emoji + '</span>' + (v.caption ? '<span class="la-v-sub">' + esc(v.caption) + '</span>' : '') + '</div>';
-      case 'stat': return '<div class="la-glow"></div><div class="la-v-stat"><div class="la-v-num">' + esc(v.value) + '</div><div class="la-v-label">' + esc(v.label) + '</div>' + (v.sublabel ? '<div class="la-v-sub">' + esc(v.sublabel) + '</div>' : '') + '</div>';
-      case 'callout': return '<blockquote class="la-v-callout">' + ico('quote', 'la-q') + '<p>' + esc(v.text) + '</p></blockquote>';
-      case 'comparison': return '<div class="la-v-cmp"><div class="la-tile"><p class="la-eyebrow">' + esc(v.left.label) + '</p><p>' + esc(v.left.text) + '</p></div><div class="la-tile hi"><p class="la-eyebrow">' + esc(v.right.label) + '</p><p>' + esc(v.right.text) + '</p></div></div>';
-      case 'steps': return '<ol class="la-v-steps">' + v.items.map(function (s, i) { return '<li><b>' + (i + 1) + '</b><span>' + esc(s) + '</span></li>'; }).join('') + '</ol>';
-      case 'code': return '<div class="la-v-code">' + (v.caption ? '<div class="la-v-codebar">' + esc(v.caption) + '</div>' : '') + '<pre><code>' + v.code + '</code></pre></div>';
-      case 'timeline': return '<ol class="la-v-tl">' + v.items.map(function (it) { return '<li><p class="la-eyebrow">' + esc(it.date) + '</p><p class="t">' + esc(it.title) + '</p>' + (it.description ? '<p class="d">' + esc(it.description) + '</p>' : '') + '</li>'; }).join('') + '</ol>';
-      case 'chart': { var max = Math.max.apply(null, v.points.map(function (p) { return p.value; })); return '<figure class="la-v-chart">' + (v.title ? '<p class="t">' + esc(v.title) + '</p>' : '') + '<div class="la-bars">' + v.points.map(function (p) { return '<i style="height:' + Math.round(p.value / max * 100) + '%" title="' + esc(p.label + ': ' + p.value) + '"></i>'; }).join('') + '</div><div class="la-bars-x">' + v.points.map(function (p) { return '<span>' + esc(p.label) + '</span>'; }).join('') + '</div>' + (v.caption ? '<figcaption class="la-v-sub">' + esc(v.caption) + '</figcaption>' : '') + '</figure>'; }
+    var title = hasTitle(v) ? '<p class="la-v-title">' + esc(v.title) + '</p>' : '';
+    switch (v.type) {
+      case 'icon':
+        return '<div class="la-ic-tile">' + ico(v.icon, 'la-ico') + '</div><p class="la-ic-title">' + esc(v.title) + '</p><p class="la-ic-cap">' + esc(v.caption) + '</p>';
+      case 'compare': {
+        var m = /^[x×](\d)$/.exec(v.relation || ''), n = m ? +m[1] : 0, draw = n >= 2 && n <= 6;
+        var bars = function (k) { if (!draw) return ''; var o = '<div class="la-cmp-bar" aria-hidden="true" style="--n:' + n + '">'; for (var i = 0; i < n; i++) o += '<i class="' + (i < k ? 'la-on' : '') + '"></i>'; return o + '</div>'; };
+        var side = function (s) { return '<p class="la-cmp-label">' + esc(s.label) + '</p><p class="la-cmp-value">' + esc(s.value) + '</p>' + (s.unit ? '<p class="la-cmp-unit">' + esc(s.unit) + '</p>' : ''); };
+        return '<div class="la-cmp"><div class="la-cmp-side">' + side(v.left) + bars(1) + '</div><div class="la-cmp-rel">' + (v.relation ? '<b>' + esc(v.relation) + '</b>' : '') + '</div><div class="la-cmp-side la-is-b">' + side(v.right) + bars(n) + '</div></div>';
+      }
+      case 'steps':
+        return title + '<ol class="la-st-list la-v-body" style="--n:' + v.steps.length + '">' + v.steps.map(function (s, i) { return '<li><span class="la-st-n">' + (i + 1) + '</span><span class="la-st-l">' + esc(s.label) + (s.note ? '<small>' + esc(s.note) + '</small>' : '') + '</span></li>'; }).join('') + '</ol>';
+      case 'stat':
+        return '<div class="la-sx"><p class="la-sx-value">' + esc(v.value) + '</p><p class="la-sx-unit">' + esc(v.unit) + '</p>' + (v.caption ? '<p class="la-sx-cap">' + esc(v.caption) + '</p>' : '') + '</div>' +
+          '<a class="la-src" href="' + esc(v.source.url) + '" target="_blank" rel="noopener noreferrer"><span class="la-src-tag">' + ico('book-open', 'la-ico') + 'Source</span><span class="la-src-text"><strong>' + esc(v.source.name) + '</strong>, <u>' + esc(v.source.title) + '</u></span>' + ico('external-link', 'la-ico la-ext') + '<span class="la-sr-only">(opens in a new tab)</span></a>';
+      case 'timeline':
+        return title + '<ol class="la-tl-list la-v-body" style="--n:' + v.events.length + '">' + v.events.map(function (ev) {
+          var sub = ev.duration ? '<small>' + ico('clock', 'la-ico') + esc(ev.duration) + '</small>' : (ev.note ? '<small>' + esc(ev.note) + '</small>' : '');
+          return '<li' + (ev.duration ? ' class="la-is-span"' : '') + '><span class="la-tl-dot"></span><span class="la-tl-t">' + esc(ev.label) + sub + '</span></li>';
+        }).join('') + '</ol>';
+      case 'dodont': {
+        var col = function (cls, head, icon, items) { return '<div class="la-dd-col ' + cls + '"><p class="la-dd-h"><span class="la-dd-i">' + ico(icon, 'la-ico') + '</span>' + head + '</p><ul>' + items.map(function (t) { return '<li>' + ico(icon, 'la-ico') + '<span>' + esc(t) + '</span></li>'; }).join('') + '</ul></div>'; };
+        return title + '<div class="la-dd-cols la-v-body">' + col('la-is-do', 'Do', 'check', v.do) + col('la-is-dont', 'Don’t', 'x', v.dont) + '</div>';
+      }
+      case 'diagram': {
+        var d = DIAGRAMS[v.template]; if (!d) return '';
+        var marks = '', calls = '';
+        v.callouts.forEach(function (c, i) {
+          var a = d.anchors[c.anchor]; if (!a) return;
+          marks += '<span class="la-dg-m' + (a.side === 'r' ? ' la-r' : '') + '" style="--x:' + (a.side === 'r' ? '100%' : '0%') + ';--y:' + a.y + '" aria-hidden="true">' + (i + 1) + '</span>';
+          calls += '<li class="' + (a.side === 'r' ? 'la-r' : 'la-l') + '" style="--y:' + a.y + '" data-n="' + (i + 1) + '"><b>' + esc(c.label) + '</b>' + (c.note ? '<small>' + esc(c.note) + '</small>' : '') + '</li>';
+        });
+        return '<div class="la-dg"><div class="la-dg-box">' + d.svg + marks + '</div><ol class="la-dg-calls">' + calls + '</ol></div><p class="la-dg-src">' + esc(d.source) + '</p>';
+      }
+      case 'definition': {
+        var tm = /^(.*?)\s*(\([^)]*\))$/.exec(v.term), term = tm ? esc(tm[1]) + ' <span>' + esc(tm[2]) + '</span>' : esc(v.term);
+        var meter = '';
+        if (v.meter && v.meter.max > 0) { var on = Math.max(1, Math.round(v.meter.value / v.meter.max * 5)); meter = '<div class="la-df-meter" aria-hidden="true">'; for (var k = 0; k < 5; k++) meter += '<i class="' + (k < on ? 'la-on' : '') + '"></i>'; meter += '</div>'; }
+        return '<div class="la-df"><p class="la-v-eyebrow">Term</p><p class="la-df-term">' + term + '</p><p class="la-df-def">' + esc(v.definition) + '</p>' +
+          (v.example ? '<div class="la-df-ex"><p class="la-v-eyebrow">Example</p><p class="la-df-ext">' + esc(v.example) + '</p>' + meter + '</div>' : '') + '</div>';
+      }
+      case 'rule': {
+        var lo = v.scale.min, hi = v.scale.max, span = hi - lo || 1, unit = v.scale.unit || '';
+        var pct = function (x) { return Math.max(0, Math.min(100, (x - lo) / span * 100)); };
+        var zones = v.zones.map(function (z) { return { from: z.from == null ? lo : z.from, to: z.to == null ? hi : z.to, label: z.label, tone: z.tone }; }).sort(function (p, q) { return p.from - q.from; });
+        var band = '', cursor = lo, legend = '';
+        zones.forEach(function (z) {
+          if (z.from > cursor) band += '<span class="la-rl-z la-mid" style="--w:' + (pct(z.from) - pct(cursor)) + '%"></span>';
+          var cls = z.tone === 'good' ? 'la-lo' : z.tone === 'caution' ? 'la-hi' : 'la-mid';
+          band += '<span class="la-rl-z ' + cls + '" style="--w:' + (pct(z.to) - pct(z.from)) + '%">' + esc(z.label) + '</span>';
+          if (cls !== 'la-mid') legend += '<span class="' + cls + '">' + esc(z.label) + '</span>';
+          cursor = z.to;
+        });
+        if (cursor < hi) band += '<span class="la-rl-z la-mid" style="--w:' + (pct(hi) - pct(cursor)) + '%"></span>';
+        var ticks = ''; for (var t = 0; t <= 5; t++) ticks += '<span>' + fmtNum(lo + span * t / 5, unit) + '</span>';
+        var pin = v.marker ? '<div class="la-rl-pin" style="--m:' + pct(v.marker.value) + '%"><span class="la-rl-pl"><b>' + fmtNum(v.marker.value, unit) + '</b><span>' + esc(v.marker.label) + '</span></span></div>' : '';
+        return '<div class="la-rl-head"><p class="la-v-title">' + esc(v.title) + '</p>' + (unit ? '<p class="la-rl-sub">scale in ' + esc(unit) + '</p>' : '') + '</div><div class="la-rl-body la-v-body"><div class="la-rl-track"><div class="la-rl-band">' + band + '</div>' + pin + '</div><div class="la-rl-ticks" aria-hidden="true">' + ticks + '</div><div class="la-rl-legend" aria-hidden="true">' + legend + '</div></div>';
+      }
+      case 'photo':
+        if (v._src) return '<img src="' + esc(v._src) + '" alt="' + esc(v.caption) + '">';
+        return '<i class="la-ph-c la-c1"></i><i class="la-ph-c la-c2"></i><i class="la-ph-c la-c3"></i><i class="la-ph-c la-c4"></i><div class="la-ph-mid">' + ico('image', 'la-ico') + '<p><b>Photo slot · 16:9</b>' + esc(v.caption) + '</p></div>';
       default: return '';
     }
   }
+  function segmentJSON(seg) { return JSON.stringify(seg, function (k, val) { return k.charAt(0) === '_' ? undefined : val; }, 2); }
   function initLesson() {
     var shell = $('#la-lesson'); if (!shell) return;
     var segs = LESSON.segments, total = segs.length;
     var idx = 0, playing = false, revealed = 0, speed = 1, timer = null, tapped = false, phase = 'play';
     var qIdx = 0, qAnswered = false, score = 0;
     var el = {
-      type: $('#la-type'), counter: $('#la-counter'), segs: $('#la-segs'), stage: $('#la-stage'), cap: $('#la-cap'), head: $('#la-lh'), nar: $('#la-nar'),
+      type: $('#la-type'), counter: $('#la-counter'), segs: $('#la-segs'), stage: $('#la-stage'), cap: $('#la-cap'), head: $('#la-lh'), key: $('#la-key'), nar: $('#la-nar'),
       play: $('#la-play'), prev: $('#la-prev'), next: $('#la-next'), player: $('.la-player'), main: $('.la-lmain'), col: $('#la-lcol'), speedCycle: $('#la-speed-cycle'),
       drawer: $('#la-drawer'), hint: $('#la-nar-hint')
     };
@@ -340,14 +417,15 @@
     function setFill(i, ratio) { fills[i].style.width = Math.round(ratio * 100) + '%'; }
     function renderSegment() {
       var s = segs[idx];
-      words = s.narration.split(/\s+/).filter(Boolean); revealed = 0;
-      el.type.innerHTML = ico('sparkles') + TYPE_LABEL[s.type];
+      words = s.body.split(/\s+/).filter(Boolean); revealed = 0;
+      el.type.innerHTML = ico('sparkles') + (TYPE_LABEL[s.kind] || s.kind);
       el.counter.textContent = (idx + 1) + ' of ' + total;
-      el.stage.className = 'la-stage' + (s.visual.kind === 'image' ? ' is-img' : '');
+      el.stage.className = stageClass(s.visual);
       el.stage.innerHTML = visualHTML(s.visual) + (!tapped ? '<button type="button" class="la-tap" id="la-tap" aria-label="Play narration"><span class="la-tap-in"><span class="la-tap-btn">' + ico('play') + '</span><span class="la-tap-label">Tap to start narration</span></span></button>' : '');
-      el.cap.textContent = s.visual.caption && s.visual.kind === 'image' ? s.visual.caption : '';
-      el.cap.hidden = !el.cap.textContent;
+      el.cap.innerHTML = photoCaption(s.visual);
+      el.cap.hidden = !el.cap.innerHTML;
       el.head.textContent = s.heading;
+      el.key.textContent = s.key_idea || '';
       el.nar.innerHTML = words.map(function (w) { return '<span class="is-dim">' + esc(w) + '</span>'; }).join(' ');
       segEls.forEach(function (sEl, i) { sEl.classList.toggle('is-done', i < idx); });
       setFill(idx, 0); for (var i = idx + 1; i < total; i++) setFill(i, 0);
@@ -393,7 +471,7 @@
       var q = LESSON.quiz[qIdx];
       el.col.innerHTML = '<section class="la-qcard" aria-live="polite"><div class="la-qhead"><span>Question ' + (qIdx + 1) + ' of ' + LESSON.quiz.length + '</span><span class="la-qdots">' + LESSON.quiz.map(function (_, i) { return '<i class="' + (i < qIdx ? 'is-done' : i === qIdx ? 'is-now' : '') + '"></i>'; }).join('') + '</span></div>' +
         '<h2 class="la-q">' + esc(q.question) + '</h2><div class="la-opts" id="la-opts">' + q.options.map(function (o, i) { return '<button type="button" class="la-opt" data-i="' + i + '"><b>' + String.fromCharCode(65 + i) + '</b><span>' + esc(o) + '</span>' + ico('check') + '</button>'; }).join('') + '</div>' +
-        '<div id="la-why"></div><div class="la-qactions"><button type="button" class="la-qask">' + '<span class="la-orb" aria-hidden="true"></span>Stuck? Ask the teacher</button><span id="la-qnext"></span></div></section>';
+        '<div id="la-why"></div><div class="la-qactions"><button type="button" class="la-qask">' + '<span class="la-ask-mark" aria-hidden="true">' + planet('mk-qask', 24) + '</span>Stuck? Ask the teacher</button><span id="la-qnext"></span></div></section>';
       $('#la-opts').addEventListener('click', function (e) {
         var b = e.target.closest('.la-opt'); if (!b || qAnswered) return;
         qAnswered = true; var i = +b.dataset.i, right = i === q.correct; if (right) score++;
@@ -419,20 +497,15 @@
     }
     /* visual kinds gallery (styleguide state) */
     function showKinds() {
-      phase = 'kinds'; el.player.hidden = true; el.hint.hidden = true; el.type.innerHTML = ico('sparkles') + 'Visual kinds'; el.counter.textContent = 'All 10 segment visuals';
-      var kinds = [
-        ['image', { kind: 'image', src: 'img/lesson-grip.jpg', alt: '' }],
-        ['icon', { kind: 'icon', name: 'target', label: 'Precision Point', caption: 'Focus your grip on the bolster for maximum stability.' }],
-        ['emoji', { kind: 'emoji', emoji: '🛡️', caption: 'Stability equals safety.' }],
-        ['stat', { kind: 'stat', value: '30 yrs', label: 'Most common U.S. mortgage term', sublabel: 'Fixed-rate loans' }],
-        ['callout', { kind: 'callout', text: 'The knife should feel like an extension of your hand, not a separate tool.' }],
-        ['comparison', { kind: 'comparison', left: { label: 'Handle grip', text: 'Unstable, less leverage, higher fatigue.' }, right: { label: 'Pinch grip', text: 'Maximum control, better balance, safer cuts.' } }],
-        ['steps', { kind: 'steps', items: ['Pinch the blade bolster with thumb and index finger.', 'Wrap the other three fingers around the handle.', "Keep a firm but relaxed hold; don't squeeze too hard."] }],
-        ['code', { kind: 'code', caption: 'monthly-payment.js', code: '<span class="c">// fixed-rate payment for a 30-year loan</span>\n<span class="k">const</span> rate = annualRate / <span class="s">12</span>;\n<span class="k">const</span> n = <span class="s">360</span>;\n<span class="k">const</span> payment = principal * rate / (<span class="s">1</span> - (<span class="s">1</span> + rate) ** -n);' }],
-        ['chart', { kind: 'chart', title: 'Share of each payment that is interest', caption: 'Illustrative, 30-year fixed loan', points: [{ label: 'Year 1', value: 85 }, { label: 'Year 10', value: 62 }, { label: 'Year 20', value: 35 }, { label: 'Year 30', value: 5 }] }],
-        ['timeline', { kind: 'timeline', items: [{ date: 'Week 1', title: 'Pre-approval', description: 'A lender checks income, debt and credit.' }, { date: 'Weeks 2–3', title: 'Offer accepted', description: 'The purchase contract starts the clock.' }, { date: 'Weeks 4–6', title: 'Underwriting and appraisal' }, { date: 'Closing day', title: 'Keys', description: 'Sign, fund, move in.' }] }]
-      ];
-      el.col.innerHTML = '<div class="la-kinds">' + kinds.map(function (k) { return '<section><h2>' + k[0] + '</h2><div class="la-stage' + (k[1].kind === 'image' ? ' is-img' : '') + '">' + visualHTML(k[1]) + '</div></section>'; }).join('') + '</div>';
+      phase = 'kinds'; el.player.hidden = true; el.hint.hidden = true; el.type.innerHTML = ico('sparkles') + 'Visual system v2'; el.counter.textContent = 'All 10 card types';
+      el.col.innerHTML = '<div class="la-kinds">' + SAMPLES.map(function (seg, i) {
+        var v = seg.visual;
+        return '<section aria-label="' + esc(v.type) + '"><p class="la-kind-type">' + ('0' + (i + 1)).slice(-2) + ' <code>' + esc(v.type) + '</code><span>segment kind: ' + esc(seg.kind) + '</span></p>' +
+          '<div class="la-slot"><div class="' + stageClass(v) + '">' + visualHTML(v) + '</div></div>' + (photoCaption(v) ? '<p class="la-cap">' + photoCaption(v) + '</p>' : '') +
+          '<h2 class="la-lh">' + esc(seg.heading) + '</h2><p class="la-key">' + esc(seg.key_idea) + '</p><p class="la-nar">' + esc(seg.body) + '</p>' +
+          '<details class="la-json"><summary>' + ico('braces', 'la-ico') + 'JSON <small>type: "' + esc(v.type) + '"</small>' + ico('chevron-down', 'la-ico la-chev') + '</summary><pre>' + esc(segmentJSON(seg)) + '</pre></details></section>';
+      }).join('') + '</div>';
+      el.main.scrollTop = 0;
     }
 
     /* controls */
