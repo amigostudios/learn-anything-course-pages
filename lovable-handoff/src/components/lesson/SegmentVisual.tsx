@@ -23,13 +23,12 @@ export function stageCaption(visual: AnyVisual | null | undefined): ReactNode {
     return (
       <>
         {visual.caption}
-        {visual.credit && (
+        {visual.credit?.photographer?.trim() && (
           <span>
-            Photo:{" "}
+            Photo: {visual.credit.photographer.trim()} ·{" "}
             <a href={visual.credit.url} target="_blank" rel="noopener noreferrer">
               {visual.credit.provider}
-            </a>{" "}
-            · {visual.credit.photographer}
+            </a>
           </span>
         )}
       </>

@@ -223,12 +223,7 @@
         "type": "photo",
         "query": "nutrition facts label two columns family size bag",
         "caption": "A dual-column label on a family-size bag",
-        "reason": "Learners need to recognise the two-column layout on a real package.",
-        "credit": {
-          "provider": "Pexels",
-          "photographer": "Photographer name",
-          "url": "https://www.pexels.com/"
-        }
+        "reason": "Learners need to recognise the two-column layout on a real package."
       }
     }
   ]
